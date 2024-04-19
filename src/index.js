@@ -57,8 +57,43 @@ function handleSearchCity(event) {
   searchLocation(searchInput.value);
 }
 
+function displayForecast() {
+    
+    let forecast = document.querySelector("#forecast");
+    
+    let days = ["Sat", "Sun", "Mon", "Tues", "Wed"];
+    let forecastHTML = "";
+
+
+
+    days.forEach(function (day) {
+        forecastHTML = forecastHTML + `<div class="weather-forecast">
+                <div class="row">
+                    <div class="col-2">
+                        <div class="forecast-date">
+                            ${day}
+                        </div><br>
+                        <img src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-night.png"
+                            alt="" width="50" class="forecast-icon" />
+                    </div>
+                    <div class="forecast-temperature">
+                        <span class="forecast-weather-max">
+                           15°
+                        </span>
+                        <span class="forecast-weather-min">
+                            12°
+                        </span>
+                    </div>
+                     
+                </div>
+            </div>`
+        
+    });
+    forecast.innerHTML = forecastHTML;
+}
 let searchFormElement = document.querySelector("#search-form");
 
 searchFormElement.addEventListener("submit", handleSearchCity);
 
 searchLocation("Lagos");
+displayForecast();
