@@ -41,7 +41,8 @@ header {
   color: rgb(25, 25, 56);
 }
 .weather-icon {
-  font-size: 50px;
+  width: 100px;
+  
 }
 .important-data {
   color: rgba(40, 190, 118, 0.832);
@@ -58,8 +59,9 @@ header {
   width: max-content;
 }
 .weather-app-unit {
-  padding-top: 3px;
-  font-size: 25px;
+  padding-top: 15px;
+  font-size: 15px;
+  padding-left: 1px;
 }
 
 footer {

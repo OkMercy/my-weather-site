@@ -17,7 +17,11 @@ function updateWeather(response) {
 
   let currentTime = document.querySelector("#currentTime");
   let date = new Date(response.data.time * 1000);
-  currentTime.innerHTML = formatDate(date);
+    currentTime.innerHTML = formatDate(date);
+    
+    let iconElement = document.querySelector("#icon")
+    iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"
+                    class="weather-icon"></img>`;
 }
 
 function formatDate(date) {
