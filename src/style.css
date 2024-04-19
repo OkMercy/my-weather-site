@@ -64,24 +64,24 @@ header {
 }
 
 footer {
+  margin-top: 30px;
   padding-top: 20px;
   border-top: 1px solid rgb(227, 241, 237);
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
 }
 .weather-forecast {
-  margin-top: 35px;
   text-align: center;
   display: flex;
   justify-content: space-between;
 }
-.forecast-date  {
+.forecast-date {
   font-size: 16px;
   opacity: 0.5;
 }
 .forecast-weather-min {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 .forecast-temperature {
-    font-size: 13px;
+  font-size: 13px;
 }

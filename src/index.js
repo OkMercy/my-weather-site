@@ -17,11 +17,13 @@ function updateWeather(response) {
 
   let currentTime = document.querySelector("#currentTime");
   let date = new Date(response.data.time * 1000);
-    currentTime.innerHTML = formatDate(date);
-    
-    let iconElement = document.querySelector("#icon")
-    iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"
+  currentTime.innerHTML = formatDate(date);
+
+  let iconElement = document.querySelector("#icon");
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"
                     class="weather-icon"></img>`;
+
+  getForecast(response.data.city);
 }
 
 function formatDate(date) {
@@ -57,43 +59,56 @@ function handleSearchCity(event) {
   searchLocation(searchInput.value);
 }
 
-function displayForecast() {
-    
-    let forecast = document.querySelector("#forecast");
-    
-    let days = ["Sat", "Sun", "Mon", "Tues", "Wed"];
-    let forecastHTML = "";
+function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+    return days[date.getDay()];
+}
 
+function getForecast(city) {
+  let apiKey = "60o969fa37bedcb0t842da02274e8c33";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
+  axios.get(apiUrl).then(displayForecast);
+}
 
-    days.forEach(function (day) {
-        forecastHTML = forecastHTML + `<div class="weather-forecast">
+function displayForecast(response) {
+
+  let forecastHTML = "";
+
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="weather-forecast">
                 <div class="row">
                     <div class="col-2">
                         <div class="forecast-date">
-                            ${day}
+                            ${formatDay(day.time)}
                         </div><br>
-                        <img src="https://shecodes-assets.s3.amazonaws.com/api/weather/icons/few-clouds-night.png"
-                            alt="" width="50" class="forecast-icon" />
+                        <img src="${day.condition.icon_url}" width="60"/>
                     </div>
                     <div class="forecast-temperature">
                         <span class="forecast-weather-max">
-                           15°
+                           ${Math.round(day.temperature.maximum)}° 
                         </span>
+
                         <span class="forecast-weather-min">
-                            12°
+                             ${Math.round(day.temperature.minimum)}°
                         </span>
                     </div>
                      
                 </div>
-            </div>`
-        
-    });
-    forecast.innerHTML = forecastHTML;
+            </div>`;
+    }
+  });
+  let forecast = document.querySelector("#forecast");
+  forecast.innerHTML = forecastHTML;
 }
 let searchFormElement = document.querySelector("#search-form");
 
 searchFormElement.addEventListener("submit", handleSearchCity);
 
 searchLocation("Lagos");
-displayForecast();
+
+
