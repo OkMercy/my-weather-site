@@ -51,6 +51,17 @@ header {
   font-weight: bold;
   color: rgb(25, 25, 56);
 }
+.weather-temp-container {
+  display: flex;
+  text-align: center;
+  margin: auto;
+  width: max-content;
+}
+.weather-app-unit {
+  padding-top: 3px;
+  font-size: 25px;
+}
+
 footer {
   padding-top: 20px;
   border-top: 1px solid rgb(227, 241, 237);
